@@ -12,16 +12,18 @@ const app = express();
 // req: du lieu gui tu client(frontend)
 // res: du lieu server tra ve cho client(FE)
 
-// app.get("/", (req, res) => {
-//   res.send("Hello");
-// });
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Hello");
+});
 
 // app.use : su dung tien to router: /api/posts
 // postRouter: toan bo routing co trong postRouter
 // app.use("/posts", postRouter);
-// app.use("/api/posts", postRouter);
-app.use("/api", userRouter);
-app.use("/api", productRouter);
+app.use("/api/posts", postRouter);
+app.use("/api/users", userRouter);
+app.use("/api/products", productRouter);
 
 // app.get("/api/posts/greet", (req, res) => {
 //     const name = req.query.name;
