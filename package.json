@@ -2,8 +2,9 @@
   "name": "nodejs",
   "version": "1.0.0",
   "main": "index.js",
-    "scripts": {
-    "dev": "nodemon --exec babel-node src/app.js"
+  "scripts": {
+    "lesson1": "nodemon --exec babel-node lesson1/src/app.js",
+    "bt3": "nodemon --exec babel-node bt3/src/app.js"
   },
   "keywords": [],
   "author": "",

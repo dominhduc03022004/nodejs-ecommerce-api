@@ -1,5 +1,7 @@
 import express from "express";
-
+import postRouter from "./router/posts";
+import userRouter from "./router/users"; 
+import productRouter from "./router/products";
 const app = express();
 
 // Định nghĩa route GET/
@@ -14,16 +16,23 @@ const app = express();
 //   res.send("Hello");
 // });
 
-app.get("/api/posts/greet", (req, res) => {
-    const name = req.query.name;
-    res.send(`Xin chào, ${name}!`)
-})
+// app.use : su dung tien to router: /api/posts
+// postRouter: toan bo routing co trong postRouter
+// app.use("/posts", postRouter);
+// app.use("/api/posts", postRouter);
+app.use("/api", userRouter);
+app.use("/api", productRouter);
 
-app.get("/api/posts/sum", (req, res) => {
-    const a = parseInt(req.query.a);
-    const b = parseInt(req.query.b);
-    res.send(`Tong ${a} + ${b} = ${a+b}`)
-})
+// app.get("/api/posts/greet", (req, res) => {
+//     const name = req.query.name;
+//     res.send(`Xin chào, ${name}!`)
+// })
+
+// app.get("/api/posts/sum", (req, res) => {
+//     const a = parseInt(req.query.a);
+//     const b = parseInt(req.query.b);
+//     res.send(`Tong ${a} + ${b} = ${a+b}`)
+// })
 
 app.listen(3000, () => {
   console.log(`Server is running on port http://localhost:3000`);
