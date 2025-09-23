@@ -26,19 +26,19 @@ postRouter.get("/", (req, res) => {
   res.json(posts);
 });
 
-postRouter.post("/", (req, res) => {
+postRouter.post("/add", (req, res) => {
   const newPost = {...req.body};
   posts.push(newPost)
   res.json(newPost)
 });
 
-postRouter.get("/:id", (req, res) => {
+postRouter.get("/detail/:id", (req, res) => {
   const { id } = req.params;
   const post = posts.find((p) => p.id == id);
   res.json(post);
 });
 
-postRouter.put("/:id", (req, res) => {
+postRouter.put("/update/:id", (req, res) => {
   const { id } = req.params;
   const index = posts.findIndex((p) => p.id == id);
   console.log(index);
@@ -46,7 +46,7 @@ postRouter.put("/:id", (req, res) => {
   res.json(posts[index]);
 });
 
-postRouter.delete("/:id", (req, res) => {
+postRouter.delete("/delete/:id", (req, res) => {
   const { id } = req.params;
   const index = posts.findIndex((p) => p.id == id);
   const deleted = posts.splice(index, 1);
