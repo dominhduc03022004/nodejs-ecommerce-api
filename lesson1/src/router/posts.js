@@ -1,5 +1,7 @@
 import { Router } from "express";
 
+import { getPosts, getPostById, addPost, updatePost, deletePost } from "../controller/post";
+
 const postRouter = Router();
 
 let posts = [
@@ -21,36 +23,14 @@ let posts = [
   },
 ];
 
-postRouter.get("/", (req, res) => {
-  console.log(req.body);
-  res.json(posts);
-});
+postRouter.get("/", getPosts);
 
-postRouter.post("/add", (req, res) => {
-  const newPost = {...req.body};
-  posts.push(newPost)
-  res.json(newPost)
-});
+postRouter.post("/add", addPost);
 
-postRouter.get("/detail/:id", (req, res) => {
-  const { id } = req.params;
-  const post = posts.find((p) => p.id == id);
-  res.json(post);
-});
+postRouter.get("/detail/:id", getPostById);
 
-postRouter.put("/update/:id", (req, res) => {
-  const { id } = req.params;
-  const index = posts.findIndex((p) => p.id == id);
-  console.log(index);
-  posts[index] = { ...posts[index], ...req.body };
-  res.json(posts[index]);
-});
+postRouter.put("/update/:id", updatePost);
 
-postRouter.delete("/delete/:id", (req, res) => {
-  const { id } = req.params;
-  const index = posts.findIndex((p) => p.id == id);
-  const deleted = posts.splice(index, 1);
-  res.json(deleted[0]);
-});
+postRouter.delete("/delete/:id", deletePost);
 
 export default postRouter;
