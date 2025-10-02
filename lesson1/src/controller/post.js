@@ -47,3 +47,27 @@ export function deletePost(req, res) {
   const deleted = posts.splice(index, 1);
   res.json(deleted[0]);
 }
+
+export function search(req, res) {
+  try {
+    const { search } = req.query;
+
+    if (posts.length === 0) {
+      return res.status(404).json({ message: "Không có bài viết nào" });
+    }
+
+    if (search) {
+      const keyword = search.toLowerCase();
+      const results = posts.filter((p) =>
+        p.title.toLowerCase().includes(keyword)
+      );
+
+      return res.json(results);
+    }
+
+    return res.json(posts);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Lỗi server" });
+  }
+}
