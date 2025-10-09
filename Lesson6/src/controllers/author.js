@@ -1,4 +1,5 @@
 import Author from '../models/Author';
+import { validateCreate } from '../validates/author';
 
 export async function getAuthors(req,res) {
     try {
@@ -23,6 +24,13 @@ export async function getAuthorById(req,res) {
 
 export async function addAuthor(req,res) {
     try {
+    const {error} = validateCreate.validate(req.body);
+    console.log('valid: ', error);
+    if (error) {
+      return res.status(400).json({
+        message: error.details[0].message
+      })
+    }
     const newPost = await Author.create(req.body);
     return res.status(201).json(newPost);
   } catch (error) {
