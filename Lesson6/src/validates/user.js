@@ -26,3 +26,17 @@ export const userValid = Joi.object({
         "any.only": "confirmPassword khong khop voi password"
     })
 })
+
+export const loginValid = Joi.object({
+    email: Joi.string().required().email().messages({
+        "string.empty": "Email khong dc de trong!",
+        "any.required": "Email la bat buoc!",
+        "string.email": "Email khong dung dinh dang!",
+    }),
+    password: Joi.string().required().min(6).max(100).messages({
+        "string.empty": "Password khong dc de trong!",
+        "any.required": "Password la bat buoc!",
+        "string.min": "Password phai nhieu hon {#limit} ky tu",
+        "string.max": "Password phai it hon {#limit + 1} ky tu",
+    })
+})
