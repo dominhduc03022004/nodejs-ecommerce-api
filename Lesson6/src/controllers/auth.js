@@ -71,7 +71,7 @@ export const signIn = async (req, res) => {
     return res.status(200).json({
       message: "Đăng nhập thành công",
       token,
-      data: user,
+    //   data: user,
     });
   } catch (error) {
     return res.status(500).json({ message: error.message });
