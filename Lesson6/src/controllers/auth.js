@@ -65,7 +65,7 @@ export const signIn = async (req, res) => {
       return res.status(401).json({ message: "Sai mật khẩu" });
     }
 
-    const token = jwt.sign({ id: user.id }, "123456", { expiresIn: "5m" });
+    const token = jwt.sign({ id: user.id }, "123456", { expiresIn: "1h" });
 
     user.password = undefined;
     return res.status(200).json({
@@ -77,3 +77,8 @@ export const signIn = async (req, res) => {
     return res.status(500).json({ message: error.message });
   }
 };
+
+export const getProfileUser = (req,res) => {
+  console.log(req.userId);
+  res.json({userId: req.userId})
+}
